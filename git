@@ -1,0 +1,7 @@
+[user]
+	name = Benjamin Murphy
+	email = benjamin_murphy@me.com
+[core]
+	editor = /usr/bin/vim
+[url "git@github.com:"]
+	insteadOf = https://github.com/
