@@ -9,12 +9,16 @@ set -g terminal-overrides 'xterm*:smcup@:rmcup@'
 set -g base-index 1
 
 bind r source-file ~/.tmux.conf
+
 bind s split-window -v -c "#{pane_current_path}"
 bind v split-window -h -c "#{pane_current_path}"
+bind c new-window
 
 bind z resize-pane -Z
 
 setw -g mode-keys vi
+bind-key -t vi-copy 'v' begin-selection
+bind-key -t vi-copy 'y' copy-selection
 
 set-option -g pane-border-fg colour235
 set-option -g pane-active-border-fg "#999999"
@@ -30,5 +34,4 @@ set-option -g mouse on
 run-shell "powerline-daemon -q"
 source /Users/benjaminmurphy/Library/Python/2.7/lib/python/site-packages/powerline/bindings/tmux/powerline.conf
 
-set-option -g default-command "reattach-to-user-namespace -l zsh"
-
+set -g history-limit 30000

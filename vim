@@ -20,8 +20,8 @@ Plugin 'xolox/vim-easytags'
 Plugin 'fatih/vim-go'
 Plugin 'benmills/vimux'
 Plugin 'scrooloose/nerdtree'
-Plugin 'weynhamz/vim-plugin-minibufexpl'
 Plugin 'wincent/terminus'
+Plugin 'vim-scripts/a.vim'
 
 call vundle#end()
 filetype plugin indent on
@@ -38,9 +38,9 @@ set guifont=Fira\ Code\ Retina:h10
 
 if has('gui_running')
     set macligatures
-    set go-=r 
-    set go-=L 
-    set go-=T 
+    set go-=r
+    set go-=L
+    set go-=T
     set go-=m
     set background=light
 else
@@ -48,7 +48,7 @@ else
     " Blacklist YCM.
     let g:ycm_python_byinary_path = 'python'
     let g:ycm_server_python_interpreter = '/usr/local/bin/python'
-    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'  
+    let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
     let g:ycm_filetype_blacklist = {
                 \ 'tagbar' : 1,
                 \ 'qf' : 1,
@@ -68,8 +68,6 @@ else
     set statusline+=%{SyntasticStatuslineFlag()}
     set statusline+=%*
 endif
-
-let g:miniBufExplAutoStart = 1
 
 " Shortcuts for swapping windows.
 nnoremap <C-J> <C-W><C-J>
@@ -152,6 +150,8 @@ map <Leader>vi :VimuxInspectRunner<CR>
 map <Leader>vq :VimuxCloseRunner<CR>
 map <Leader>vx :VimuxInterruptRunner<CR>
 map <Leader>vz :call VimuxZoomRunner()<CR>
+
+let g:ctrlp_working_path_mode = 'a'
 
 " CtrlP MRU
 map <C-b> :CtrlPMRU<CR>
@@ -266,6 +266,16 @@ let g:easytags_events = ['VimEnter', 'BufWritePost']
 command! -nargs=? -complete=buffer -bang BufOnly
     \ :call BufOnly('<args>', '<bang>')
 
+command! -nargs=0 -complete=buffer TrimWhitespace :call TrimWhitespace()
+
+autocmd BufWritePre * :call TrimWhitespace()
+
+function! TrimWhitespace()
+    let l:save = winsaveview()
+    %s/\s\+$//e
+    call winrestview(l:save)
+endfunction
+
 function! BufOnly(buffer, bang)
 	if a:buffer == ''
 		" No buffer provided, use the current buffer.
@@ -317,4 +327,11 @@ endfunction
 nnoremap H gT
 nnoremap L gt
 
-set shortmess+=IF
+set shortmess+=IAa
+
+nnoremap <leader>y :YcmForceCompileAndDiagnostics<CR>
+nnoremap <leader>pg :YcmCompleter GoToDefinitionElseDeclaration<CR>
+nnoremap <leader>pd :YcmCompleter GoToDefinition<CR>
+nnoremap <leader>pc :YcmCompleter GoToDeclaration<CR>
+
+let NERDTreeMinimalUI=1
