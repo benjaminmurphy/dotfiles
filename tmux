@@ -17,8 +17,6 @@ bind c new-window
 bind z resize-pane -Z
 
 setw -g mode-keys vi
-bind-key -t vi-copy 'v' begin-selection
-bind-key -t vi-copy 'y' copy-selection
 
 set-option -g pane-border-fg colour235
 set-option -g pane-active-border-fg "#999999"

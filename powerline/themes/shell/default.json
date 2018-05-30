@@ -24,6 +24,11 @@
                 "priority": 30
             },
             {
+                "function": "powerline.segments.common.net.hostname",
+                "only_if_ssh": true,
+                "priority": 30
+            },
+            {
                 "function": "powerline.segments.common.time.date",
                 "args": {
                     "format": "%H:%M %b %d"

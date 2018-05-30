@@ -22,6 +22,7 @@ Plugin 'benmills/vimux'
 Plugin 'scrooloose/nerdtree'
 Plugin 'wincent/terminus'
 Plugin 'vim-scripts/a.vim'
+Plugin 'jparise/vim-graphql'
 
 call vundle#end()
 filetype plugin indent on
@@ -29,9 +30,9 @@ filetype plugin indent on
 source ~/.vim/plugin/cscope_maps.vim
 
 " Load Powerline configuration.
-python from powerline.vim import setup as powerline_setup
-python powerline_setup()
-python del powerline_setup
+python3 from powerline.vim import setup as powerline_setup
+python3 powerline_setup()
+python3 del powerline_setup
 
 set gfn=Fira\ Code\ Retina:h10
 set guifont=Fira\ Code\ Retina:h10
